@@ -13,7 +13,9 @@ import { ConfigModule } from './config/config.module';
     CategoryModule,
     ItemModule,
     UserModule,
-    Conf.forRoot(),
+    Conf.forRoot({
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
