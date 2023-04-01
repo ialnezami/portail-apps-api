@@ -1,1 +1,4 @@
-export class Config {}
+export class Config {
+  key: string;
+  value: string;
+}
