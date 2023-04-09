@@ -19,8 +19,13 @@ export class ItemService {
   async findAll() {
     return await this.ItemModel.find().exec();
   }
-
-  async findOne(id: number) {
+  async findAllPrivate() {
+    return await this.ItemModel.find({ isPublic: false }).exec();
+  }
+  async findAllPublic() {
+    return await this.ItemModel.find({ isPublic: true }).exec();
+  }
+  async findOne(id: string) {
     return await this.ItemModel.findById(id);
   }
 
@@ -29,7 +34,7 @@ export class ItemService {
     return await this.ItemModel.updateOne({ id }, updateItemDto);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.ItemModel.findByIdAndRemove(id);
   }
 }

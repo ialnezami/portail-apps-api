@@ -15,7 +15,22 @@ export class Item {
   icone: string;
   @Prop({ required: false, default: 0 })
   weight: number;
+  @Prop({ required: true, default: false })
+  public: boolean;
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);
 export type ItemDocument = Item & Document;
+
+/**
+ * example of item
+ {
+  "name": "Potion de soin",
+  "description": "Une potion de soin",
+  "id": "potion-de-soin",
+  "link": "https://www.dofus.com/fr/mmorpg/encyclopedie/equipements/potion-de-soin",
+  "icone": "https://staticns.ankama.com/dofus/www/game/items/200/200.png",
+  "weight": 1
+}
+  
+ */
