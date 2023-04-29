@@ -1,26 +1,40 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { Item, ItemDocument } from './entities/item.entity';
 
 @Injectable()
 export class ItemService {
-  create(createItemDto: CreateItemDto) {
-    return 'This action adds a new item';
+  constructor(
+    @InjectModel(Item.name)
+    private ItemModel: Model<ItemDocument>,
+  ) {}
+  async create(createItemDto: CreateItemDto) {
+    const createdItem = new this.ItemModel(createItemDto);
+    return await createdItem.save();
   }
 
-  findAll() {
-    return `This action returns all item`;
+  async findAll() {
+    return await this.ItemModel.find().exec();
+  }
+  async findAllPrivate() {
+    return await this.ItemModel.find({ isPublic: false }).exec();
+  }
+  async findAllPublic() {
+    return await this.ItemModel.find({ isPublic: true }).exec();
+  }
+  async findOne(id: string) {
+    return await this.ItemModel.findById(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  async update(id: string, updateItemDto: UpdateItemDto) {
+    //update an item by id
+    return await this.ItemModel.updateOne({ id }, updateItemDto);
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} item`;
+  async remove(id: string) {
+    return await this.ItemModel.findByIdAndRemove(id);
   }
 }

@@ -1,4 +1,13 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+@Schema()
 export class Config {
+  @Prop({ required: true })
   key: string;
+  @Prop({ required: true })
   value: string;
 }
+
+export const ConfigSchema = SchemaFactory.createForClass(Config);
+export type ConfigDocument = Config & Document;
