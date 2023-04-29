@@ -35,11 +35,7 @@ export class CategoryController {
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-<<<<<<< HEAD
-    return this.categoryService.update(+id, updateCategoryDto);
-=======
     return this.categoryService.update(id, updateCategoryDto);
->>>>>>> origin/dev
   }
 
   @Delete(':id')
