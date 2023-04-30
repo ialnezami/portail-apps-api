@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 @Schema()
 export class Category {
@@ -11,6 +11,13 @@ export class Category {
   description: string;
   @Prop({ required: true })
   wight: number;
+  @Prop({ required: false })
+  items: [
+    {
+      type: mongoose.Schema.Types.ObjectId;
+      ref: 'Item';
+    },
+  ];
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

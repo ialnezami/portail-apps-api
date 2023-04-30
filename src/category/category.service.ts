@@ -17,7 +17,11 @@ export class CategoryService {
   }
 
   async findAll() {
-    return this.categoryModel.find().exec();
+    const response = await this.categoryModel.find().populate({
+      path: 'items',
+      populate: { path: 'category', model: 'Category' },
+    });
+    return response;
   }
 
   async findOne(id: string) {
@@ -26,6 +30,13 @@ export class CategoryService {
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     return this.categoryModel.updateOne({ id: id }, updateCategoryDto);
+  }
+
+  async addItem(id: string, itemId: string) {
+    return await this.categoryModel.updateOne(
+      { _id: id },
+      { $push: { items: itemId } },
+    );
   }
 
   async remove(id: string) {

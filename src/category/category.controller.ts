@@ -37,6 +37,10 @@ export class CategoryController {
   ) {
     return this.categoryService.update(id, updateCategoryDto);
   }
+  @Patch(':id/addItem/:itemId')
+  addItem(@Param('id') id: string, @Param('itemId') itemId: string) {
+    return this.categoryService.addItem(id, itemId);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

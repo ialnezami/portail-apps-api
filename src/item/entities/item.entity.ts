@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 @Schema()
 export class Item {
@@ -17,6 +17,10 @@ export class Item {
   weight: number;
   @Prop({ required: true, default: false })
   public: boolean;
+  category: {
+    type: mongoose.Schema.Types.ObjectId;
+    ref: 'Category';
+  };
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);
@@ -30,7 +34,8 @@ export type ItemDocument = Item & Document;
   "id": "potion-de-soin",
   "link": "https://www.dofus.com/fr/mmorpg/encyclopedie/equipements/potion-de-soin",
   "icone": "https://staticns.ankama.com/dofus/www/game/items/200/200.png",
-  "weight": 1
+  "weight": 1,
+  "public": true
 }
   
  */
