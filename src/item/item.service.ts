@@ -31,7 +31,7 @@ export class ItemService {
 
   async update(_id: string, updateItemDto: UpdateItemDto) {
     //update an item by id
-    return await this.ItemModel.updateOne({ _id }, updateItemDto);
+   return await this.ItemModel.updateOne({ _id }, updateItemDto).exec();
   }
 
   async remove(id: string) {
