@@ -26,14 +26,16 @@ export class ItemService {
     return await this.ItemModel.find({ isPublic: true }).exec();
   }
   async findOne(id: string) {
-    return await this.ItemModel.findById(id);
+    return await this.ItemModel.findById(id).exec();
   }
 
-  async update(_id: string, updateItemDto: UpdateItemDto) {
-    //update an item by id
-    console.log(_id)
-    console.log(updateItemDto)
-   return await this.ItemModel.updateOne({ _id }, updateItemDto).exec();
+  async updateitem(id: string, updateItemDto: UpdateItemDto) {
+    const item = await this.ItemModel.findByIdAndUpdate(
+      id,
+      { $set: updateItemDto },
+      { new: true },
+    );
+    return item;
   }
 
   async remove(id: string) {

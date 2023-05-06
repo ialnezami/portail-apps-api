@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { ItemService } from './item.service';
 import { CreateItemDto } from './dto/create-item.dto';
@@ -16,36 +17,39 @@ export class ItemController {
   constructor(private readonly itemService: ItemService) {}
 
   @Get()
-  findAll() {
-    return this.itemService.findAll();
+  async findAll() {
+    return await this.itemService.findAll();
   }
 
   @Get('public')
-  findAllPublic() {
-    return this.itemService.findAllPublic();
+  async findAllPublic() {
+    return await this.itemService.findAllPublic();
   }
   @Get('private')
-  findAllPrivate() {
-    return this.itemService.findAllPrivate();
+  async findAllPrivate() {
+    return await this.itemService.findAllPrivate();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return await this.itemService.findOne(id);
   }
 
   @Post()
-  create(@Body() createItemDto: CreateItemDto) {
-    return this.itemService.create(createItemDto);
+  async create(@Body() createItemDto: CreateItemDto) {
+    return await this.itemService.create(createItemDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-    return this.itemService.update(id, updateItemDto);
+  async upupdateitemate(
+    @Param('id') id: string,
+    @Body() updateItemDto: UpdateItemDto,
+  ) {
+    return await this.itemService.updateitem(id, updateItemDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemService.remove(id);
+  async remove(@Param('id') id: string) {
+    return await this.itemService.remove(id);
   }
 }
