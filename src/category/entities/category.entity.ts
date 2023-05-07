@@ -11,13 +11,11 @@ export class Category {
   description: string;
   @Prop({ required: true })
   wight: number;
-  @Prop({ required: false })
-  items: [
-    {
-      type: mongoose.Schema.Types.ObjectId;
-      ref: 'Item';
-    },
-  ];
+  @Prop({
+    required: false,
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Item' }],
+  })
+  items: string[];
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

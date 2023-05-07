@@ -17,15 +17,12 @@ export class CategoryService {
   }
 
   async findAll() {
-    const response = await this.categoryModel.find().populate({
-      path: 'items',
-      populate: { path: 'category', model: 'Category' },
-    });
+    const response = await this.categoryModel.find().populate('items');
     return response;
   }
 
   async findOne(id: string) {
-    return await this.categoryModel.findById(id);
+    return await this.categoryModel.findById(id).populate('items');
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {

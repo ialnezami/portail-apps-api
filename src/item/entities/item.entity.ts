@@ -17,10 +17,12 @@ export class Item {
   weight: number;
   @Prop({ required: true, default: false })
   public: boolean;
-  category: {
-    type: mongoose.Schema.Types.ObjectId;
-    ref: 'Category';
-  };
+  @Prop({
+    required: false,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+  })
+  category: string;
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);
