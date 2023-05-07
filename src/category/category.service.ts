@@ -29,7 +29,12 @@ export class CategoryService {
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryModel.updateOne({ id: id }, updateCategoryDto);
+    const category = await this.categoryModel.findByIdAndUpdate(
+      id,
+      { $set: updateCategoryDto },
+      { new: true },
+    );
+    return category;
   }
 
   async addItem(id: string, itemId: string) {
