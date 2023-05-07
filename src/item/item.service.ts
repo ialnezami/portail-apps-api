@@ -17,16 +17,16 @@ export class ItemService {
   }
 
   async findAll() {
-    return await this.ItemModel.find().exec();
+    return await this.ItemModel.find().populate('category');
   }
   async findAllPrivate() {
-    return await this.ItemModel.find({ isPublic: false }).exec();
+    return await this.ItemModel.find({ isPublic: false }).populate('category');
   }
   async findAllPublic() {
-    return await this.ItemModel.find({ isPublic: true }).exec();
+    return await this.ItemModel.find({ isPublic: true }).populate('category');
   }
   async findOne(id: string) {
-    return await this.ItemModel.findById(id).exec();
+    return await this.ItemModel.findById(id).populate('category');
   }
 
   async updateitem(id: string, updateItemDto: UpdateItemDto) {
